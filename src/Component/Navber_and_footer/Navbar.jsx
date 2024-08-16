@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -70,13 +71,7 @@ function Navbar() {
                                     }`}
                             >
                                 <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
-                                    <a
-                                        href="#"
-                                        className="px-3 py-2 mx-3 mt-2  transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 dark:hover:bg-gray-700"
-                                    >
-                                        Home
-                                    </a>
-
+                                   <NavLink className={"text-[18px] btn bg-[#fcc]"}>Home</NavLink>
                                 </div>
 
                             </div>
