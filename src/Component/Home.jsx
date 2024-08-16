@@ -11,11 +11,11 @@ const Home = () => {
     const [carentpage, setCarrentPage] = useState(0);
     const numberofpage = Math.ceil(count / totalparpage);
     const pages = [...Array(numberofpage).keys()];
-    const [order, setOrder] = useState('');
+    const [priceShort, setPriceShort] = useState('');
     const [categorys, setCategorys] = useState('')
     const [serch, setserch] = useState('')
 
-    console.log(serch)
+    console.log(allproducts)
 
     const handelDainamicpage = (e) => {
         const inputValue = parseInt(e.target.value);
@@ -35,8 +35,8 @@ const Home = () => {
         }
     };
 
-    const hendelorder = (e) => {
-        setOrder(e.target.value);
+    const handelPeiceShort = (e) => {
+        setPriceShort(e.target.value);
     };
 
     // category short
@@ -52,17 +52,22 @@ const Home = () => {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/productes?page=${carentpage}&size=${totalparpage}&categorys=${categorys}&serch=${serch}`)
+        axios.get(`http://localhost:3000/productes?page=${carentpage}&size=${totalparpage}&categorys=${categorys}&serch=${serch}&priceShort=${priceShort}`)
             .then(data => {
                 let sortedData = data.data;
-                if (order === 'ass') {
-                    sortedData = [...sortedData].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-                } else if (order === 'dess') {
-                    sortedData = [...sortedData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                sortedData = [...sortedData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                if (priceShort === "hi") {
+                    sortedData = [...sortedData].sort((a, b) => parseInt(b.price) - parseInt(a.price));
+                } else if (priceShort === "low") {
+                    sortedData = [...sortedData].sort((a, b) => parseInt(a.price) - parseInt(b.price));
                 }
                 setAllproducts(sortedData);
+
+
             })
-    }, [carentpage, totalparpage, order, categorys, serch]);
+    }, [carentpage, totalparpage, categorys, serch, priceShort]);
 
     return (
         <section className='w-[90%] mx-auto px-5 py-10 md:py-20'>
@@ -83,10 +88,10 @@ const Home = () => {
                     <option value={'Fitness'}>Fitness</option>
                     <option value={'Outdoor'}>Outdoor</option>
                 </select>
-                <select onChange={hendelorder} className="select select-secondary w-full max-w-xs">
-                    <option value=''>Date Sort By</option>
-                    <option value='ass'>Oldest First</option>
-                    <option value='dess'>Newest First</option>
+                <select onChange={handelPeiceShort} className="select select-secondary w-full max-w-xs">
+                    <option value=''>Price Sort By</option>
+                    <option value='low'>Low price</option>
+                    <option value='hi'>Hight price</option>
                 </select>
                 <div className="">
                     <form onSubmit={handelsearch} className="flex relative rounded-md w-full px-4 max-w-xl">
@@ -107,24 +112,38 @@ const Home = () => {
 
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {allproducts.map((product, index) => (
-                    <div key={index} className="product-item border hover:shadow-2xl duration-300 p-5 rounded-md">
-                        <div className='bg-[#e6dddd] py-10'>
-                            <img src={product.productImage} alt={product.productName} className="product-image w-48 object-cover mx-auto" />
-                        </div>
-                        <h2 className="product-name text-xl mt-5 font-semibold">Name: {product.productName}</h2>
-                        <p className="product-description"><span className='text-xl font-medium'>Description: </span> {product.description}</p>
-                        <p className="product-price"><span className='text-xl font-medium'>Price: </span> ${product.price}</p>
-                        <p className="product-category"><span className='text-xl font-medium'>Category: </span> {product.category}</p>
-                        <p className="product-ratings"><span className='text-xl font-medium'>Ratings: </span> {product.ratings}</p>
-                        <p className="product-ratings"><span className='text-xl font-medium'>Time : </span> {product.createdAt}</p>
-                    </div>
-                ))}
+                {
+                    allproducts.length > 0 && (
+                        allproducts.map((product, index) => (
+                            <div key={index} className="product-item border hover:shadow-2xl duration-300 p-5 rounded-md">
+                                <div className='bg-[#e6dddd] py-10'>
+                                    <img src={product.productImage} alt={product.productName} className="product-image w-48 object-cover mx-auto" />
+                                </div>
+                                <h2 className="product-name text-xl mt-5 font-semibold">Name: {product.productName}</h2>
+                                <p className="product-description"><span className='text-xl font-medium'>Description: </span> {product.description}</p>
+                                <p className="product-price"><span className='text-xl font-medium'>Price: </span> ${product.price}</p>
+                                <p className="product-category"><span className='text-xl font-medium'>Category: </span> {product.category}</p>
+                                <p className="product-ratings"><span className='text-xl font-medium'>Ratings: </span> {product.ratings}</p>
+                                <p className="product-ratings"><span className='text-xl font-medium'>Time : </span> {product.createdAt}</p>
+                            </div>
+                        ))
+                    )
+
+                }
             </div>
+            {
+                allproducts.length === 0 && (
+                    <div className=''>
+                        <h1 className='uppercase text-center text-2xl font-bold pb-5'>data not found</h1>
+                        <img className='bg-cover rounded-md bg-center w-full h-full' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoL8RBNTbZGJ49Ah8qlbqaKs7PVkbnJ1Ij9w&usqp=CAU" alt="Not Found" />
+                    </div>
+                )
+            }
+
             <div className='flex justify-center mt-5 md:mt-10'>
                 <button className="btn btn-warning" onClick={handelprevious}>Previous</button>
                 {pages.map(page => (
-                    <button className={carentpage === page ? 'btn ml-2 p-button h-2 w-2 text-[18px]' : 'btn ml-2 h-2 w-2 text-[18px]'} key={page} onClick={() => setCarrentPage(page)}>
+                    <button className={carentpage === page ? 'btn btn-warning btn-outline ml-2 p-button h-2 w-2 text-[18px]' : 'btn btn-warning btn-outline ml-2 h-2 w-2 text-[18px]'} key={page} onClick={() => setCarrentPage(page)}>
                         {page + 1}
                     </button>
                 ))}
