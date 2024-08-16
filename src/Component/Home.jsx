@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import './home.css';
+import { HiSearch } from 'react-icons/hi';
 
 const Home = () => {
     const [allproducts, setAllproducts] = useState([]);
@@ -12,7 +13,9 @@ const Home = () => {
     const pages = [...Array(numberofpage).keys()];
     const [order, setOrder] = useState('');
     const [categorys, setCategorys] = useState('')
-    console.log(categorys)
+    const [serch, setserch] = useState('')
+
+    console.log(serch)
 
     const handelDainamicpage = (e) => {
         const inputValue = parseInt(e.target.value);
@@ -36,26 +39,34 @@ const Home = () => {
         setOrder(e.target.value);
     };
 
-// category short
+    // category short
     const handelCategory = (e) => {
         setCategorys(e.target.value)
+        setCarrentPage(0)
+    }
+
+    const handelsearch = (e) => {
+        e.preventDefault()
+        setserch(e.target.secarch.value)
+
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/productes?page=${carentpage}&size=${totalparpage}&categorys=${categorys}`)
+        axios.get(`http://localhost:3000/productes?page=${carentpage}&size=${totalparpage}&categorys=${categorys}&serch=${serch}`)
             .then(data => {
-                // let sortedData = data.data;
-                // if (order === 'ass') {
-                //     sortedData = [...sortedData].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-                // } else if (order === 'dess') {
-                //     sortedData = [...sortedData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-                // }
-                setAllproducts(data.data);
+                let sortedData = data.data;
+                if (order === 'ass') {
+                    sortedData = [...sortedData].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+                } else if (order === 'dess') {
+                    sortedData = [...sortedData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                }
+                setAllproducts(sortedData);
             })
-    }, [carentpage, totalparpage, order]);
+    }, [carentpage, totalparpage, order, categorys, serch]);
 
     return (
         <section className='w-[90%] mx-auto px-5 py-10 md:py-20'>
+
             <div className='flex flex-wrap justify-center mb-10 md:mb-16 gap-10'>
                 <select onChange={handelCategory} className="select select-accent w-full max-w-xs">
                     <option value=''>Category Sort By</option>
@@ -77,6 +88,23 @@ const Home = () => {
                     <option value='ass'>Oldest First</option>
                     <option value='dess'>Newest First</option>
                 </select>
+                <div className="">
+                    <form onSubmit={handelsearch} className="flex relative rounded-md w-full px-4 max-w-xl">
+                        <input
+                            type="text"
+                            name="secarch"
+                            id="query"
+                            placeholder="Enter product Name"
+                            className="w-full p-3 rounded-md border  rounded-r-none border-[#FF00D3]  dark:placeholder-gray-300 "
+                        />
+                        <button className="inline-flex items-center gap-2 bg-[#FF00D3] text-white text-lg font-semibold py-3 px-6 rounded-r-md">
+                            <span className="hidden md:block">
+                                <HiSearch />
+                            </span>
+                        </button>
+                    </form>
+                </div>
+
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {allproducts.map((product, index) => (
@@ -89,6 +117,7 @@ const Home = () => {
                         <p className="product-price"><span className='text-xl font-medium'>Price: </span> ${product.price}</p>
                         <p className="product-category"><span className='text-xl font-medium'>Category: </span> {product.category}</p>
                         <p className="product-ratings"><span className='text-xl font-medium'>Ratings: </span> {product.ratings}</p>
+                        <p className="product-ratings"><span className='text-xl font-medium'>Time : </span> {product.createdAt}</p>
                     </div>
                 ))}
             </div>
