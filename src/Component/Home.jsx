@@ -11,6 +11,8 @@ const Home = () => {
     const numberofpage = Math.ceil(count / totalparpage);
     const pages = [...Array(numberofpage).keys()];
     const [order, setOrder] = useState('');
+    const [categorys, setCategorys] = useState('')
+    console.log(categorys)
 
     const handelDainamicpage = (e) => {
         const inputValue = parseInt(e.target.value);
@@ -34,26 +36,48 @@ const Home = () => {
         setOrder(e.target.value);
     };
 
+// category short
+    const handelCategory = (e) => {
+        setCategorys(e.target.value)
+    }
+
     useEffect(() => {
-        axios.get(`http://localhost:3000/productes?page=${carentpage}&size=${totalparpage}`)
+        axios.get(`http://localhost:3000/productes?page=${carentpage}&size=${totalparpage}&categorys=${categorys}`)
             .then(data => {
-                let sortedData = data.data;
-                if (order === 'ass') {
-                    sortedData = [...sortedData].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-                } else if (order === 'dess') {
-                    sortedData = [...sortedData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-                }
-                setAllproducts(sortedData);
+                // let sortedData = data.data;
+                // if (order === 'ass') {
+                //     sortedData = [...sortedData].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+                // } else if (order === 'dess') {
+                //     sortedData = [...sortedData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                // }
+                setAllproducts(data.data);
             })
     }, [carentpage, totalparpage, order]);
 
     return (
         <section className='w-[90%] mx-auto px-5 py-10 md:py-20'>
-            <select onChange={hendelorder} className="select select-secondary w-full max-w-xs">
-                <option value=''>Sort By</option>
-                <option value='ass'>Oldest First</option>
-                <option value='dess'>Newest First</option>
-            </select>
+            <div className='flex flex-wrap justify-center mb-10 md:mb-16 gap-10'>
+                <select onChange={handelCategory} className="select select-accent w-full max-w-xs">
+                    <option value=''>Category Sort By</option>
+                    <option value={'Electronics'}>Electronics</option>
+                    <option value={'Accessories'}>Accessories</option>
+                    <option value={'Health'}>Health</option>
+                    <option value={'Home'}>Home</option>
+                    <option value={'Furniture'}>Furniture</option>
+                    <option value={'Books'}>Books</option>
+                    <option value={'Tools'}>Tools</option>
+                    <option value={'Music'}>Music</option>
+                    <option value={'Pets'}>Pets</option>
+                    <option value={'Outdoor'}>Outdoor</option>
+                    <option value={'Fitness'}>Fitness</option>
+                    <option value={'Outdoor'}>Outdoor</option>
+                </select>
+                <select onChange={hendelorder} className="select select-secondary w-full max-w-xs">
+                    <option value=''>Date Sort By</option>
+                    <option value='ass'>Oldest First</option>
+                    <option value='dess'>Newest First</option>
+                </select>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {allproducts.map((product, index) => (
                     <div key={index} className="product-item border hover:shadow-2xl duration-300 p-5 rounded-md">
