@@ -7,7 +7,7 @@ import { HiSearch } from 'react-icons/hi';
 const Home = () => {
     const [allproducts, setAllproducts] = useState([]);
     const { count } = useLoaderData();
-    const [totalparpage, setTotalperpage] = useState(9);
+    const [totalparpage, setTotalperpage] = useState(12);
     const [carentpage, setCarrentPage] = useState(0);
     const numberofpage = Math.ceil(count / totalparpage);
     const pages = [...Array(numberofpage).keys()];
@@ -52,7 +52,7 @@ const Home = () => {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/productes?page=${carentpage}&size=${totalparpage}&categorys=${categorys}&serch=${serch}&priceShort=${priceShort}`)
+        axios.get(`https://jobtask-servire.vercel.app/productes?page=${carentpage}&size=${totalparpage}&categorys=${categorys}&serch=${serch}&priceShort=${priceShort}`)
             .then(data => {
                 let sortedData = data.data;
 
@@ -115,7 +115,7 @@ const Home = () => {
                 {
                     allproducts.length > 0 && (
                         allproducts.map((product, index) => (
-                            <div key={index} className="product-item border hover:shadow-2xl duration-300 p-5 rounded-md">
+                            <div key={index} className="main-hover product-item border hover:shadow-2xl duration-300 p-5 rounded-md">
                                 <div className='bg-[#e6dddd] py-10'>
                                     <img src={product.productImage} alt={product.productName} className="product-image w-48 object-cover mx-auto" />
                                 </div>
@@ -140,16 +140,14 @@ const Home = () => {
                 )
             }
 
-            <div className='flex justify-center mt-5 md:mt-10'>
-                <button className="btn btn-warning" onClick={handelprevious}>Previous</button>
+            <div className='flex justify-center mt-5 md:mt-10 '>
+                <button className="btn  btn-warning" onClick={handelprevious}>Previous</button>
                 {pages.map(page => (
                     <button className={carentpage === page ? 'btn btn-warning btn-outline ml-2 p-button h-2 w-2 text-[18px]' : 'btn btn-warning btn-outline ml-2 h-2 w-2 text-[18px]'} key={page} onClick={() => setCarrentPage(page)}>
                         {page + 1}
                     </button>
                 ))}
                 <select onChange={handelDainamicpage} className="block w-sm text-sm font-medium mt-[6px] ml-2 transition duration-75 border border-gray-800 rounded-lg shadow-sm h-9 focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 bg-none">
-                    <option value="6">6</option>
-                    <option value="9">9</option>
                     <option value="12">12</option>
                     <option value="15">15</option>
                     <option value="18">18</option>

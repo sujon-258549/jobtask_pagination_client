@@ -1,0 +1,95 @@
+.swiper-slide {
+    position: relative;
+}
+
+.swiper-button-prev {
+    background-color: rgb(178, 241, 241);
+    border-radius: 100%;
+    border: 2px solid red;
+    color: red;
+    font-weight: 900;
+    top: 80%;
+    left: 80%;
+    padding: 5px 10px;
+    position: absolute;
+    --swiper-navigation-size: "10px"
+
+
+}
+
+.swiper-button-next {
+
+    background-color: rgb(178, 241, 241);
+    border-radius: 100%;
+    border: 2px solid red;
+    color: red;
+    font-weight: 900;
+    top: 80%;
+    right: 12%;
+    padding: 5px 10px;
+    position: absolute;
+    --swiper-navigation-size: "10px"
+}
+
+.swiper {
+    padding-top: 72px;
+}
+
+
+
+@media only screen and (max-width: 880px) {
+    .swiper-button-next{
+        right: 10%;
+    }
+  }
+@media only screen and (max-width: 768px) {
+    .swiper-button-next{
+        right: 10%;
+    }
+  }
+@media only screen and (max-width: 680px) {
+    .swiper-button-next{
+        right: 10%;
+        
+    }
+    .swiper-button-prev{
+        left: 77%;
+
+    }
+  }
+@media only screen and (max-width: 520px) {
+    .swiper-button-next{
+        right: 10%;
+    }
+    .swiper-button-prev{
+        left: 73%;
+
+    }
+  }
+@media only screen and (max-width: 480px) {
+    .swiper-button-next{
+        right: 10%;
+    }
+    /* .swiper-button-prev{
+        left: 77%;
+
+    } */
+  }
+@media only screen and (max-width: 380px) {
+    .swiper-button-next{
+        right: 10%;
+    }
+    .swiper-button-prev{
+        left: 67%;
+
+    }
+  }
+@media only screen and (max-width: 300px) {
+    .swiper-button-next{
+        right: 10%;
+    }
+    /* .swiper-button-prev{
+        left: 77%;
+
+    } */
+  }

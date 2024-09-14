@@ -1,87 +1,92 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { CreatAuthContext } from '../Firebase/Authprovider';
+import '../../Component/home.css'
+import { IoMdMenu } from 'react-icons/io';
+import { RxCross2 } from 'react-icons/rx';
+import { PiSignInBold } from 'react-icons/pi';
+import { CiLogout } from 'react-icons/ci';
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
+    const { user, signout } = useContext(CreatAuthContext)
+    console.log(user)
+
+    const handelsignout = () => {
+        signout();
+    }
+
     return (
-        <div className='Navber bg-[#b2bcad]'>
-            <div className='w-[90%] mx-auto px-5'>
-                <nav className="relative">
-                    <div className=" mx-auto">
-                        <div className="lg:flex lg:items-center lg:justify-between">
-                            <div className="flex items-center justify-between">
-                                <a href="#">
-                                    <img
-                                        className="w-auto h-20 sm:h-20"
-                                        src="https://i.ibb.co/BPrqFzn/Online-shop-button-removebg-preview.png"
-                                        alt=""
-                                    />
-                                </a>
+        <section className='fixed z-50 w-full'>
+            <div className='Navber bg-[#b2bcad] w-full'>
+                <div className='w-[90%] mx-auto px-5'>
+                    <nav className="relative">
+                        <div className=" mx-auto">
+                            <div className="lg:flex lg:items-center lg:justify-between ">
+                                <div className="flex items-center justify-between -mb-6 lg:-mb-0">
+                                    <a href="#">
+                                        <img
+                                            className="w-auto h-20 sm:h-20"
+                                            src="https://i.ibb.co/BPrqFzn/Online-shop-button-removebg-preview.png"
+                                            alt=""
+                                        />
+                                    </a>
 
-                                {/* Mobile menu button */}
-                                <div className="flex lg:hidden">
-                                    <button className="mr-5 btn btn-outline btn-accent text-[18px] font-medium">Sing Up</button>
-                                    <button
-                                        onClick={() => setIsOpen(!isOpen)}
-                                        type="button"
-                                        className="text-gray-500  hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
-                                        aria-label="toggle menu"
-                                    >
+                                    {/* Mobile menu button */}
+                                    <div className="flex lg:hidden">
+                                        <div className='lg:hidden block'>
+                                            {
+                                                user ? <button onClick={handelsignout} className="cssbuttons-io-button">Sing out
+                                                    <div class="icon">
 
-                                        {isOpen ? (
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="w-6 h-6"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                                strokeWidth="2"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M6 18L18 6M6 6l12 12"
-                                                />
-                                            </svg>
-                                        ) : (
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="w-6 h-6"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                                strokeWidth="2"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M4 8h16M4 16h16"
-                                                />
-                                            </svg>
-                                        )}
-                                    </button>
+                                                        <CiLogout className='font-extrabold'></CiLogout>
+                                                    </div>
+                                                </button> : <Link to={'/singin'} className="cssbuttons-io-button">Sing In
+                                                    <div class="icon">
+                                                        {/* <!-- You can replace this with any SVG icon --> */}
+                                                        <PiSignInBold></PiSignInBold>
+                                                    </div>
+                                                </Link>
+                                            }
+                                        </div>
+                                        <button
+                                            onClick={() => setIsOpen(!isOpen)}
+                                            type="button"
+                                            className="text-gray-500  hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
+                                            aria-label="toggle menu"
+                                        >
 
-                                </div>
-                            </div>
+                                            {isOpen ? (
+                                                <RxCross2 className='text-3xl rounded-sm border border-black ml-2  text-black font-bold' style={{ boxShadow: '1px 1px 10px' }}></RxCross2 >
+                                            ) : (
+                                                <IoMdMenu className='text-3xl rounded-sm border border-black ml-2  text-black font-bold' style={{ boxShadow: '1px 1px 10px' }}></IoMdMenu>
+                                            )}
+                                        </button>
 
-                            {/* Mobile Menu open: "block", Menu closed: "hidden" */}
-                            <div
-                                className={`absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out  lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center ${isOpen ? 'translate-x-0 opacity-100' : 'opacity-0 -translate-x-full'
-                                    }`}
-                            >
-                                <div className="flex flex-col ml-2 -mx-6 lg:flex-row lg:items-center lg:mx-8">
-                                    <NavLink className="inline-flex items-center justify-center rounded-xl bg-green-600 py-3 px-6 font-dm text-base font-medium text-white shadow-xl shadow-green-400/75 transition-transform duration-200 ease-in-out hover:scale-[1.02]"
-                                        href="#">Home</NavLink>
-                                    <NavLink className="inline-flex ml-2 items-center justify-center rounded-xl bg-green-600 py-3 px-6 font-dm text-base font-medium text-white shadow-xl shadow-green-400/75 transition-transform duration-200 ease-in-out hover:scale-[1.02]"
-                                        href="#">Area</NavLink>
-                                    <NavLink className="inline-flex items-center justify-center rounded-xl bg-green-600 py-3 px-6 font-dm text-base font-medium text-white shadow-xl shadow-green-400/75 ml-2 transition-transform duration-200 ease-in-out hover:scale-[1.02]"
-                                        href="#">Contact</NavLink>
+                                    </div>
                                 </div>
 
-                            </div>
-                            <div className="flex items-center mt-4 lg:mt-0">
-                                {/* <button
+                                {/* Mobile Menu open: "block", Menu closed: "hidden" */}
+                                <div
+                                    className={`absolute main-menu bg-white inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out  lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center ${isOpen ? 'translate-x-0 opacity-100' : 'opacity-0 -translate-x-full'
+                                        }`}
+                                >
+                                    <div className="flex flex-col gap-2 ml-2 -mx-6 lg:flex-row lg:items-center lg:mx-8">
+                                        <NavLink className="button"
+                                            to={'/'}>Home</NavLink>
+
+                                        <NavLink className="button"
+                                            to={'/home'}>All Product</NavLink>
+                                        <NavLink className="button"
+                                            to={'a'}>Area</NavLink>
+                                        <NavLink to={'/contact'} className="button"
+                                        >Contact</NavLink>
+                                    </div>
+
+                                </div>
+                                <div className="flex items-center mt-4 lg:mt-0">
+                                    {/* <button
                                     className="hidden mx-4 text-gray-600 transition-colors duration-300 transform lg:block  hover: dark:hover:text-gray-400 focus: dark:focus:text-gray-400 focus:outline-none"
                                     aria-label="show notifications"
                                 >
@@ -100,15 +105,31 @@ function Navbar() {
                                         />
                                     </svg>
                                 </button> */}
-                                <button className="rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 px-6 py-3 text-white hover:from-pink-500 hover:to-yellow-500">Sing Up</button>
+                                    <div className='hidden lg:block'>
+                                        {
+                                            user ? <button onClick={handelsignout} className="cssbuttons-io-button">Sing out
+                                                <div class="icon">
 
+                                                    <CiLogout className='font-extrabold'></CiLogout>
+                                                </div>
+                                            </button> : <Link to={'/singin'} className="cssbuttons-io-button">Sing In
+                                                <div class="icon">
+                                                    {/* <!-- You can replace this with any SVG icon --> */}
+                                                    <PiSignInBold></PiSignInBold>
+                                                </div>
+                                            </Link>
+                                        }
+                                    </div>
+
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </nav>
-            </div>
+                    </nav>
+                </div>
 
-        </div>
+            </div>
+        </section>
     );
 }
 

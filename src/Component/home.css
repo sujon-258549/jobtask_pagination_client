@@ -1,3 +1,200 @@
-.p-button{
-    background-color: yellow;
+/* Base button styling */
+.button {
+    --border-radius: 11px;
+    --border-width: 4px;
+    appearance: none;
+    position: relative;
+    padding: 12px 20px;
+    border: 0;
+    background-color: #212121;
+    font-family: "Roboto", Arial, "Segoe UI", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    z-index: 2;
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+/* Button gradient and animation */
+.button::after {
+    border-radius: 10px;
+    --m-i: linear-gradient(#000, #000);
+    --m-o: content-box, padding-box;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: var(--border-width);
+    border-radius: var(--border-radius);
+    background-image: conic-gradient(#488cfb,
+            #29dbbc,
+            #ddf505,
+            #ff9f0e,
+            #e440bb,
+            #655adc,
+            #488cfb);
+    -webkit-mask-image: var(--m-i), var(--m-i);
+    mask-image: var(--m-i), var(--m-i);
+    -webkit-mask-origin: var(--m-o);
+    mask-origin: var(--m-o);
+    -webkit-mask-clip: var(--m-o);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+    filter: hue-rotate(0);
+    animation: rotate-hue linear 500ms infinite;
+    animation-play-state: paused;
+}
+
+/* Button hover state */
+.button:hover::after {
+    animation-play-state: running;
+}
+
+/* Keyframes for hue rotation */
+@keyframes rotate-hue {
+    to {
+        filter: hue-rotate(1turn);
+    }
+}
+
+/* Active button styling with animated effects */
+.button.active {
+    position: relative;
+    width: 120px;
+    height: 40px;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    border: none;
+    padding: 12px;
+    gap: 12px;
+    border-radius: 8px;
+}
+
+.button.active::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    left: -4px;
+    top: -5px;
+    width: 128px;
+    height: 48px;
+    border-radius: 10px;
+    background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
+    z-index: -10;
+    pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.button.active::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
+    transform: translate3d(0, 0, 0) scale(0.95);
+    filter: blur(20px);
+    transition: filter 0.4s ease;
+}
+
+.button.active:hover::after {
+    filter: blur(30px);
+}
+
+.button.active:hover::before {
+    transform: rotate(-180deg);
+}
+
+.button.active:active::before {
+    transform: scale(0.7);
+}
+
+/* sign in button */
+/* From Uiverse.io by adamgiebl */ 
+/* General button styling */
+.cssbuttons-io-button {
+    background: #a370f0;
+    color: white;
+    font-family: inherit;
+    padding: 0.35em;
+    padding-left: 1.2em;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 0.9em;
+    border: none;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 0 1.6em -0.6em #714da6;
+    overflow: hidden;
+    position: relative;
+    height: 2.8em;
+    padding-right: 3.3em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Icon styling inside the button */
+.cssbuttons-io-button .icon {
+    background: white;
+    margin-left: 1em;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.2em;
+    width: 2.2em;
+    border-radius: 0.7em;
+    box-shadow: 0.1em 0.1em 0.6em 0.2em #7b52b9;
+    right: 0.3em;
+    transition: all 0.3s;
+}
+
+/* On hover, expand the icon area */
+.cssbuttons-io-button:hover .icon {
+    width: calc(100% - 0.6em);
+}
+
+/* SVG icon inside the icon div */
+.cssbuttons-io-button .icon svg {
+    width: 1.1em;
+    transition: transform 0.3s;
+    color: #7b52b9;
+}
+
+/* On hover, slightly translate the icon to the right */
+.cssbuttons-io-button:hover .icon svg {
+    transform: translateX(0.1em);
+}
+
+/* When the button is active (pressed), shrink the icon slightly */
+.cssbuttons-io-button:active .icon {
+    transform: scale(0.95);
+}
+
+
+
+/* navber style */
+
+
+
+@media only screen and (max-width: 1023px) {
+
+    .ease-in-out {
+        left: -67px;
+        margin-top: 16px;
+        padding-right: 50px;
+        height: 100vh;
+        padding-left:40px ;
+        min-width: fit-content;
+    
+    }
 }
