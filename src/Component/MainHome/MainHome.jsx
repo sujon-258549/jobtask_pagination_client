@@ -5,6 +5,7 @@ import ImageMarque from './ImageMarque';
 import ImageMarque2 from './ImageMarque2';
 import Developer from './Developer';
 import BrandProduct from './BrandProduct';
+import DeveloperSosalmedia from './DeveloperSosalmedia';
 
 const MainHome = () => {
     return (
@@ -15,6 +16,7 @@ const MainHome = () => {
            <ImageMarque></ImageMarque>
            <BrandProduct></BrandProduct>
            <Developer></Developer>
+           <DeveloperSosalmedia></DeveloperSosalmedia>
         </div>
     );
 }
