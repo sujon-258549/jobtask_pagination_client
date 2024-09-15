@@ -117,8 +117,82 @@
     transform: scale(0.7);
 }
 
-/* sign in button */
-/* From Uiverse.io by adamgiebl */ 
+/* logo */
+/* From Uiverse.io by Creatlydev */ 
+.logo {
+    cursor: pointer;
+    border: none;
+    background: #7808d0;
+    color: #fff;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    place-content: center;
+    transition:
+      background 300ms,
+      transform 200ms;
+    font-weight: 600;
+  }
+  
+  .button__text {
+    position: absolute;
+    inset: 0;
+    animation: text-rotation 8s linear infinite;
+  
+    > span {
+      position: absolute;
+      transform: rotate(calc(19deg * var(--index)));
+      inset: 7px;
+    }
+  }
+  
+  .button__circle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    background: #fff;
+    color: #7808d0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .button__icon--copy {
+    position: absolute;
+    transform: translate(-150%, 150%);
+  }
+  
+  .logo:hover {
+    background: #000;
+    transform: scale(1.05);
+  }
+  
+  .logo:hover .button__icon {
+    color: #000;
+  }
+  
+  .logo:hover .button__icon:first-child {
+    transition: transform 0.3s ease-in-out;
+    transform: translate(150%, -150%);
+  }
+  
+  .logo:hover .button__icon--copy {
+    transition: transform 0.3s ease-in-out 0.1s;
+    transform: translate(0);
+  }
+  
+  @keyframes text-rotation {
+    to {
+      rotate: 360deg;
+    }
+  }
+  
+/* From Uiverse.io by adamgiebl */
 /* General button styling */
 .cssbuttons-io-button {
     background: #a370f0;
@@ -184,6 +258,371 @@
 
 /* navber style */
 
+/* card */
+/* From Uiverse.io by Pravins01 */
+/* From Uiverse.io by bhaveshxrawat */
+.card {
+    width: 100%;
+    height: 100%;
+    background: #07182E;
+    position: relative;
+    display: flex;
+    overflow: hidden; /* Make sure this is not hiding your animation */
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.card h2, .card p {
+    z-index: 2;
+    color: white;
+}
+
+.card p {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.card img {
+    z-index: 3; /* Ensure the image is on top */
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    width: 200%; /* Make sure the before element is large enough to be noticed */
+    height: 200%;
+    background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+    top: -50%; /* Center the background effect */
+    left: -50%;
+    animation: rotBGimg 5s linear infinite; /* Slowed animation for better visibility */
+    z-index: 0; /* Ensure it stays in the background */
+    border-radius: 50%; /* Smooth the rotation */
+    opacity: 0.5; /* Optional: Adjust opacity if it’s too distracting */
+}
+
+@keyframes rotBGimg {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    background: #07182E;
+    inset: 5px;
+    border-radius: 15px;
+    z-index: 1;
+}
+
+
+/* .card:hover:before {
+    background-image: linear-gradient(180deg, rgb(81, 255, 0), purple);
+    animation: rotBGimg 3.5s linear infinite;
+  } */
+
+
+
+  /* paginaction buttons */
+
+  /* From Uiverse.io by ShadowShahriar */ 
+.buttons {
+    --border-radius: 15px;
+    --border-width: 4px;
+    appearance: none;
+    position: relative;
+    padding: 12px 20px;
+    margin-left: 3px;
+    border: 0;
+    background-color: #212121;
+    font-family: "Roboto", Arial, "Segoe UI", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    z-index: 2;
+   }
+   
+   .buttons::after {
+    --m-i: linear-gradient(#000, #000);
+    --m-o: content-box, padding-box;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+   
+    height: 100%;
+    padding: var(--border-width);
+    border-radius: var(--border-radius);
+    background-image: conic-gradient(
+           #488cfb,
+           #29dbbc,
+           #ddf505,
+           #ff9f0e,
+           #e440bb,
+           #655adc,
+           #488cfb
+       );
+    -webkit-mask-image: var(--m-i), var(--m-i);
+    mask-image: var(--m-i), var(--m-i);
+    -webkit-mask-origin: var(--m-o);
+    mask-origin: var(--m-o);
+    -webkit-mask-clip: var(--m-o);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+    filter: hue-rotate(0);
+    animation: rotate-hue linear 500ms infinite;
+    animation-play-state: paused;
+   }
+   
+   .buttons:hover::after {
+    animation-play-state: running;
+    border-radius: 15px;
+   }
+   
+   @keyframes rotate-hue {
+    to {
+     filter: hue-rotate(1turn);
+    }
+   }
+   
+   .buttons,
+   .buttons::after {
+    box-sizing: border-box;
+    border-radius: 15px;
+   }
+   
+   .buttons:active {
+    --border-width: 5px;
+   }
+
+
+   /* raguler button */
+   
+
+
+   /* From Uiverse.io by Kabak */ 
+   .Btn {
+    height: 50px;
+    margin: 5px;
+    width: 50px;
+    background: #333;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-family: Consolas, Courier New, monospace;
+    border: solid #404c5d 1px;
+    font-size: 16px;
+    color: rgb(161, 161, 161);
+    -webkit-transition: 500ms;
+    transition: 500ms;
+    border-radius: 5px;
+    background: linear-gradient(145deg, #2e2d2d, #212121);
+    -webkit-box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
+      inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
+    box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
+      inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
+  }
+  
+  .Btn:hover {
+    -webkit-box-shadow: 1px 1px 13px #20232e, -1px -1px 13px #545b78;
+    box-shadow: 1px 1px 13px #20232e, -1px -1px 13px #545b78;
+    color: #d6d6d6;
+    -webkit-transition: 500ms;
+    transition: 500ms;
+  }
+
+
+  /* next button */
+  /* From Uiverse.io by polina066 */ 
+/* From Uiverse.io by liceajj */ 
+.cta {
+    display: flex;
+    padding: 5px 10px;
+    margin-left: 15px;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-size: 25px;
+    color: white;
+    background: #2768b3;
+    transition: 1s;
+    box-shadow: 6px 6px 0 black;
+    transform: skewX(-15deg);
+    border: none;
+  }
+  
+  .cta:focus {
+    outline: none;
+  }
+  
+  .cta:hover {
+    transition: 0.5s;
+    box-shadow: 10px 10px 0 #869da6;
+  }
+  
+  .cta .second {
+    transition: 0.5s;
+    margin-right: 0px;
+  }
+  
+  .cta:hover .second {
+    transition: 0.5s;
+    margin-right: 45px;
+  }
+  
+   .cta.span {
+    transform: skewX(15deg);
+  }
+  
+   .cta.second {
+    width: 20px;
+    margin-left: 30px;
+    position: relative;
+    top: 12%;
+  }
+  
+   .cta.one {
+    transition: 0.4s;
+    transform: translateX(-60%);
+  }
+  
+   .cta.two {
+    transition: 0.5s;
+    transform: translateX(-30%);
+  }
+  
+  .cta:hover .three {
+    animation: color_anim 1s infinite 0.2s;
+  }
+  
+  .cta:hover .one {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.6s;
+  }
+  
+  .cta:hover .two {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.4s;
+  }
+  
+  @keyframes color_anim {
+    0% {
+      fill: white;
+    }
+  
+    50% {
+      fill: #2768b3;
+    }
+  
+    100% {
+      fill: white;
+    }
+  }
+
+
+  /* cathover 2 */
+  
+.ctas {
+    display: flex;
+    padding: 5px 10px;
+    margin-right: 15px;
+    margin-left: 15px;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-size: 25px;
+    color: white;
+    background: #2768b3;
+    transition: 1s;
+    box-shadow: 6px 6px 0 black;
+    transform: skewX(-15deg);
+    border: none;
+  }
+  
+  .ctas:focus {
+    outline: none;
+  }
+  
+  .ctas:hover {
+    transition: 0.5s;
+    box-shadow: 10px 10px 0 #869da6;
+  }
+  
+  .ctas .second {
+    transition: 0.5s;
+    margin-right: 0px;
+  }
+  
+  .ctas:hover .second {
+    transition: 0.5s;
+    margin-right: 45px;
+  }
+  
+  .ctas.span {
+    transform: skewX(15deg);
+  }
+  
+  .ctas.second {
+    width: 20px;
+    margin-left: 30px;
+    position: relative;
+    top: 12%;
+  }
+  
+  .ctas.one {
+    transition: 0.4s;
+    transform: translateX(-60%);
+  }
+  
+  .ctas.two {
+    transition: 0.5s;
+    transform: translateX(-30%);
+  }
+  
+  .ctas:hover .three {
+    animation: color_anim 1s infinite 0.2s;
+  }
+  
+  .ctas:hover .one {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.6s;
+  }
+  
+  .ctas:hover .two {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.4s;
+  }
+  
+  @keyframes color_anim {
+    0% {
+      fill: white;
+    }
+  
+    50% {
+      fill: #2768b3;
+    }
+  
+    100% {
+      fill: white;
+    }
+  }
+  
+  
+  /* button:active {
+    -webkit-box-shadow: 1px 1px 13px #20232e, -1px -1px 33px #545b78;
+    box-shadow: 1px 1px 13px #20232e, -1px -1px 33px #545b78;
+    color: #d6d6d6;
+    -webkit-transition: 100ms;
+    transition: 100ms;
+  } */
+  
 
 
 @media only screen and (max-width: 1023px) {
@@ -193,8 +632,8 @@
         margin-top: 16px;
         padding-right: 50px;
         height: 100vh;
-        padding-left:40px ;
+        padding-left: 40px;
         min-width: fit-content;
-    
+
     }
 }

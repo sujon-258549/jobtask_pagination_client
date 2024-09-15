@@ -1,0 +1,70 @@
+.logo {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    background-color: #07182E;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    transition: background-color 0.3s ease-in-out;
+    font-family: sans-serif;
+}
+
+.logo:hover {
+    background-color: #0A2C5E;
+}
+
+.button__text {
+    display: inline-flex;
+    gap: 2px;
+}
+
+.button__text span {
+    display: inline-block;
+    position: relative;
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo:hover .button__text span {
+    transform: translateY(-10px); /* Moves the text slightly on hover */
+    transition-delay: calc(var(--index) * 0.05s); /* Staggered delay for animation */
+}
+
+.button__circle {
+    position: absolute;
+    right: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 50%;
+    padding: 6px;
+    width: 32px;
+    height: 32px;
+}
+
+.button__icon {
+    fill: #07182E;
+}
+
+.button__icon--copy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.logo:hover .button__icon--copy {
+    opacity: 1;
+    transform: rotate(180deg);
+}
+
+.logo:hover .button__icon {
+    opacity: 0;
+    transform: rotate(-180deg);
+}
