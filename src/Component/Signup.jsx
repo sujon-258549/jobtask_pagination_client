@@ -60,59 +60,64 @@ const Signup = () => {
                 <div className="py-10 mx-auto max-w-[90%]">
 
                     <div className="card shadow shrink-0 w-full md:w-[50%] bg-[#ffffff4e]   mx-auto my-10" data-aos="zoom-in" data-aos-duration="5500">
-                        <h1 className="text-[35px] font-bold text-center pt-10">Register your account</h1>
-                        <form className="card-body" onSubmit={handelsubmitRegiste}>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text text-xl font-semibold">Your Name</span>
-                                </label>
-                                <input type="text"  placeholder="Enter your name" name="name" className="input input-bordered" required />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text text-xl font-semibold">Photo URL</span>
-                                </label>
-                                <input type="text" placeholder="Type your URL" name="photourl" className="input input-bordered" required />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text text-xl font-semibold">Email address</span>
-                                </label>
-                                <input type="email" placeholder="Enter your email address" name="email" className="input input-bordered" required />
-                            </div>
-                            <div className="form-control relative">
-                                <label className="label">
-                                    <span className="label-text text-xl font-semibold">Password</span>
-                                </label>
-                                <input type={shoandHideIcone ? 'text' : 'password'} name="password" placeholder="Enter your password" className="input input-bordered" required />
-                                <div className="absolute right-5 bottom-4" onClick={() => setShoandHideIcone(!shoandHideIcone)}>
-                                    {
-                                        shoandHideIcone ? <FaEyeSlash className="text-xl"></FaEyeSlash> : <FaEye className="text-xl"></FaEye>
-                                    }
+
+                        <div className="w-full md:w-[70%] lg:w-[50%]   mx-auto my-10 " style={{ zIndex: '999' }}>
+
+                            <h1 className="text-[35px] text-white font-bold text-center pt-10">Register your account</h1>
+                            <form className="card-body" onSubmit={handelsubmitRegiste}>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text text-xl font-semibold">Your Name</span>
+                                    </label>
+                                    <input type="text" placeholder="Enter your name" name="name" className="input input-bordered" required />
                                 </div>
-                            </div>
-                            <div className="form-control relative">
-                                <label className="label">
-                                    <span className="label-text text-xl font-semibold">Confirm Password</span>
-                                </label>
-                                <input type={shoandHideIcone ? 'text' : 'password'} name="conframPassword" placeholder="Enter your Confirm password" className="input input-bordered" required />
-                                <div className="absolute right-5 bottom-4" onClick={() => setShoandHideIcone(!shoandHideIcone)}>
-                                    {
-                                        shoandHideIcone ? <FaEyeSlash className="text-xl"></FaEyeSlash> : <FaEye className="text-xl"></FaEye>
-                                    }
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text text-xl font-semibold">Photo URL</span>
+                                    </label>
+                                    <input type="text" placeholder="Type your URL" name="photourl" className="input input-bordered" required />
                                 </div>
-                            </div>
-                            <div className="pt-5">
-                                <input type="checkbox" name="checked" />
-                                <span className="ml-3 font-semibold text-[16px]">Accept Terms & Conditions</span>
-                            </div>
-                            {signupError && <p className="font-semibold text-red-600">{signupError}</p>}
-                            {successSignIn && <p className="text-green-600 font-semibold">{successSignIn}</p>}
-                            <div className="form-control mt-6">
-                                <button className="btn hover:text-black shadow bg-[#403F3F] text-white">Register</button>
-                            </div>
-                        </form>
-                        <p className="font-semibold text-[16px] pb-10 text-center">Already Have An Account? <Link to={'/singin'} className="text-[#F75B5F]">Login</Link></p>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text text-xl font-semibold">Email address</span>
+                                    </label>
+                                    <input type="email" placeholder="Enter your email address" name="email" className="input input-bordered" required />
+                                </div>
+                                <div className="form-control relative">
+                                    <label className="label">
+                                        <span className="label-text text-xl font-semibold">Password</span>
+                                    </label>
+                                    <input type={shoandHideIcone ? 'text' : 'password'} name="password" placeholder="Enter your password" className="input input-bordered" required />
+                                    <div className="absolute right-5 bottom-4" onClick={() => setShoandHideIcone(!shoandHideIcone)}>
+                                        {
+                                            shoandHideIcone ? <FaEyeSlash className="text-xl"></FaEyeSlash> : <FaEye className="text-xl"></FaEye>
+                                        }
+                                    </div>
+                                </div>
+                                <div className="form-control relative">
+                                    <label className="label">
+                                        <span className="label-text text-xl font-semibold">Confirm Password</span>
+                                    </label>
+                                    <input type={shoandHideIcone ? 'text' : 'password'} name="conframPassword" placeholder="Enter your Confirm password" className="input input-bordered" required />
+                                    <div className="absolute right-5 bottom-4" onClick={() => setShoandHideIcone(!shoandHideIcone)}>
+                                        {
+                                            shoandHideIcone ? <FaEyeSlash className="text-xl"></FaEyeSlash> : <FaEye className="text-xl"></FaEye>
+                                        }
+                                    </div>
+                                </div>
+                                <div className="pt-5">
+                                    <input type="checkbox" name="checked" />
+                                    <span className="ml-3 text-white font-semibold text-[16px]">Accept Terms & Conditions</span>
+                                </div>
+                                {signupError && <p className="font-semibold text-red-600">{signupError}</p>}
+                                {successSignIn && <p className="text-green-600 font-semibold">{successSignIn}</p>}
+                                <div className="form-control mt-6">
+                                    <button className="btn hover:text-black shadow bg-[#403F3F] text-white">Register</button>
+                                </div>
+                            </form>
+                            <p className="font-semibold text-[16px] text-white pb-10 text-center">Already Have An Account? <Link to={'/singin'} className="text-[#F75B5F]">Login</Link></p>
+                        </div>
+
                     </div>
 
                 </div>
